@@ -1,4 +1,4 @@
-# Campus Food Delivery Aggregation MVP (Vue)
+# 校园订餐系统 (Vue+JavaEE)
 
 Vue 3 + Vite web frontend MVP for university food delivery aggregation, covering customer / merchant / rider flows with mock services for future Java EE REST API replacement.
 

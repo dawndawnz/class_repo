@@ -188,6 +188,11 @@ export async function updateDeliveryStatus(deliveryId: number, status: DeliveryS
   localDeliveries = localDeliveries.map((delivery) => (delivery.id === deliveryId ? { ...delivery, status } : delivery))
 }
 
+export async function getReviewsByMerchant(merchantId: number): Promise<Review[]> {
+  await wait()
+  return clone(localReviews.filter((r) => r.merchantId === merchantId))
+}
+
 export async function getUserAddresses(userId: number): Promise<UserAddress[]> {
   await wait()
   return clone(localAddresses.filter((address) => address.userId === userId))

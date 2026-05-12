@@ -26,6 +26,11 @@ export interface Merchant {
   category: string
   description: string
   rating: number
+  imageUrl?: string
+  deliveryTime?: number
+  deliveryFee?: number
+  minOrder?: number
+  monthSales?: number
 }
 
 export interface Promotion {
@@ -42,6 +47,8 @@ export interface Dish {
   price: number
   stock: number
   description: string
+  imageUrl?: string
+  salesCount?: number
 }
 
 export interface UserAddress {

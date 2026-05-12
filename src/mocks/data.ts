@@ -225,7 +225,7 @@ export const orders: Order[] = [
     merchantId: 106,
     merchantName: '嗒嗒奶茶铺',
     status: 'completed',
-    totalAmount: 28,
+    totalAmount: 40,
     createdAt: '2026-05-08 15:30',
     addressId: 1
   }
@@ -236,7 +236,7 @@ export const orderItems: OrderItem[] = [
   { id: 2, orderId: 5001, dishId: 1002, dishName: '香菇鸡腿饭', price: 20, quantity: 1 },
   { id: 3, orderId: 5002, dishId: 1004, dishName: '鸡胸肉藜麦沙拉', price: 22, quantity: 1 },
   { id: 4, orderId: 5003, dishId: 1013, dishName: '珍珠奶茶', price: 12, quantity: 2 },
-  { id: 5, orderId: 5003, dishId: 1014, dishName: '芋泥波波奶茶', price: 16, quantity: 0 }
+  { id: 5, orderId: 5003, dishId: 1014, dishName: '芋泥波波奶茶', price: 16, quantity: 1 }
 ]
 
 export const deliveries: Delivery[] = [

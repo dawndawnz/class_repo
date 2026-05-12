@@ -36,25 +36,68 @@ async function checkout() {
 </script>
 
 <template>
-  <section class="card">
-    <h2>购物车 / 结算</h2>
-    <p v-if="!cartStore.items.length">购物车为空，请先选择菜品。</p>
+  <div class="container" style="padding-top:14px;">
+    <div class="section-header" style="padding-top:4px;">
+      <span class="section-title">🛒 购物车</span>
+    </div>
+
+    <div v-if="!cartStore.items.length" class="card" style="text-align:center;padding:48px 0;color:var(--c-text-3);">
+      <div style="font-size:40px;margin-bottom:12px;">🛒</div>
+      <div>购物车空空如也</div>
+      <router-link to="/customer/home">
+        <button class="btn btn-primary" style="margin-top:16px;">去选购</button>
+      </router-link>
+    </div>
+
     <template v-else>
-      <p><strong>商家：</strong>{{ cartStore.merchantName }}</p>
-      <div class="card" v-for="item in cartStore.items" :key="item.dishId" style="margin: 8px 0">
-        <div class="title-row">
-          <span>{{ item.dishName }} × {{ item.quantity }}</span>
-          <strong>￥{{ item.price * item.quantity }}</strong>
+      <!-- Merchant name -->
+      <div class="card" style="margin-bottom:10px;">
+        <div style="font-size:13px;color:var(--c-text-3);margin-bottom:4px;">来自</div>
+        <div style="font-size:16px;font-weight:700;">{{ cartStore.merchantName }}</div>
+      </div>
+
+      <!-- Items -->
+      <div class="card" style="padding:0;margin-bottom:10px;">
+        <div
+          v-for="item in cartStore.items"
+          :key="item.dishId"
+          style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid var(--c-border);"
+        >
+          <div>
+            <div style="font-weight:600;">{{ item.dishName }}</div>
+            <div style="font-size:13px;color:var(--c-text-3);">× {{ item.quantity }}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-weight:700;color:var(--c-accent);">¥{{ item.price * item.quantity }}</span>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <button class="btn btn-round btn-secondary" @click="cartStore.updateQuantity(item.dishId, item.quantity - 1)">−</button>
+              <span style="font-weight:700;min-width:16px;text-align:center;">{{ item.quantity }}</span>
+              <button class="btn btn-round btn-add" @click="cartStore.updateQuantity(item.dishId, item.quantity + 1)">+</button>
+            </div>
+          </div>
         </div>
       </div>
-      <label>
-        配送地址
-        <select v-model.number="selectedAddressId">
-          <option v-for="address in addresses" :key="address.id" :value="address.id">{{ address.label }} - {{ address.detail }}</option>
+
+      <!-- Address -->
+      <div class="card" style="margin-bottom:10px;">
+        <div style="font-size:13px;color:var(--c-text-3);margin-bottom:8px;">📍 配送地址</div>
+        <select v-model.number="selectedAddressId" style="width:100%;">
+          <option v-for="address in addresses" :key="address.id" :value="address.id">
+            {{ address.label }} — {{ address.detail }}
+          </option>
         </select>
-      </label>
-      <p><strong>合计：</strong>￥{{ cartStore.totalAmount }}</p>
-      <button @click="checkout">提交订单（模拟支付）</button>
+      </div>
+
+      <!-- Total + checkout -->
+      <div class="card" style="display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <span style="font-size:13px;color:var(--c-text-3);">合计</span>
+          <span style="font-size:20px;font-weight:700;color:var(--c-accent);margin-left:8px;">¥{{ cartStore.totalAmount }}</span>
+        </div>
+        <button class="btn btn-accent" style="padding:10px 28px;font-size:15px;" @click="checkout">
+          去结算
+        </button>
+      </div>
     </template>
-  </section>
+  </div>
 </template>
